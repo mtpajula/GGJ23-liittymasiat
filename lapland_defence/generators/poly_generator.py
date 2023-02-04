@@ -1,7 +1,6 @@
 from engine.components.coordinates.screen import Screen
-from engine.components.types.area_object import AreaObject
 import geopandas
-import matplotlib.pyplot as plt
+from lapland_defence.game_objects.game.municipality import Municipality
 
 
 class PolyGenerator:
@@ -12,7 +11,7 @@ class PolyGenerator:
     def load_data(self):
         return geopandas.read_file(self.data_path)
 
-    def generate(self, screen: Screen) -> list[AreaObject]:
+    def generate(self, screen: Screen) -> list[Municipality]:
         areas = []
         print("generate poly")
         data_fr = self.load_data()
@@ -44,7 +43,7 @@ class PolyGenerator:
         # plt.show()
 
         for index, row in data_fr.iterrows():
-            area = AreaObject(name=row["nimi"], polygon=row["geometry"])
+            area = Municipality(name=row["nimi"], polygon=row["geometry"])
             # area.position = int(row['game_x']), int(row['game_y'])
             print(f'{area.name} {area.position}')
             # print(row["geometry"].geoms[0].bounds)
