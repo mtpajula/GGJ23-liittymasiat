@@ -4,8 +4,6 @@ from engine.components.coordinates.screen import Screen
 from engine.components.scene import Scene
 from engine.controllers.navigator import Navigator
 
-# clock = pygame.time.Clock()
-
 
 class MainGame:
 
@@ -28,7 +26,11 @@ class MainGame:
     def handle_events(self):
         for event in self.pygame.event.get():
             if event.type == self.pygame.QUIT:
-                self.run = False
+                self.close()
+
+            if event.type == pygame.MOUSEBUTTONUP:
+                pos = pygame.mouse.get_pos()
+                self.scenes[self.navigator.current_scene].on_event(self, pos)
 
     def loop(self):
         while self.run:

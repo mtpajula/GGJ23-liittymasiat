@@ -17,3 +17,7 @@ class Scene:
     def close(self, main_game):
         for game_object in self.objects:
             game_object.close(main_game)
+
+    def on_event(self, main_game, position: tuple[int, int]):
+        for game_object in self.objects:
+            game_object.on_event(main_game, position)

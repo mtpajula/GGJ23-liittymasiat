@@ -1,17 +1,17 @@
-from engine.components.game_object import GameObject
+from engine.components.types.text_object import TextObject
 from engine.main_game import MainGame
 
 
-class StartGameTextButton(GameObject):
+class StartGameTextButton(TextObject):
 
     def __init__(self):
-        self.text_surface = None
-
-    def draw(self, main_game: MainGame):
-        main_game.window.blit(self.text_surface, (100, 100))
-
-    def close(self, main_game: MainGame):
-        pass
+        super().__init__('Start Game')
 
     def start(self, main_game: MainGame):
-        self.text_surface = main_game.font.render('Some Text', False, (255, 255, 255))
+        super().start(main_game)
+        self.position = main_game.screen.location(left=500, top=500)
+        self.bounds = (500, 100)
+
+    def on_bounds_event(self, main_game: MainGame):
+        print("change scene")
+        main_game.navigator.current_scene = 'intro'
