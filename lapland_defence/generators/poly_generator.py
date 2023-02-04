@@ -44,10 +44,10 @@ class PolyGenerator:
         # plt.show()
 
         for index, row in data_fr.iterrows():
-            area = AreaObject(name=row["nimi"], polygon=row["geometry"].geoms[0])
+            area = AreaObject(name=row["nimi"], polygon=row["geometry"])
             # area.position = int(row['game_x']), int(row['game_y'])
             print(f'{area.name} {area.position}')
-            print(row["geometry"].geoms[0].bounds)
+            # print(row["geometry"].geoms[0].bounds)
             # print(row['centroid_column'].x)
             # print(row['centroid_column'].y)
             areas.append(area)

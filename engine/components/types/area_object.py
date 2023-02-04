@@ -1,4 +1,4 @@
-from shapely import Polygon
+from shapely import Polygon, Point
 
 from engine.components.coordinates.screen import Screen
 from engine.components.game_object import GameObject
@@ -6,18 +6,18 @@ from engine.components.game_object import GameObject
 
 class AreaObject(GameObject):
 
-    def __init__(self, name, polygon: Polygon):
+    def __init__(self, name, polygon: Polygon, area_tap=None):
         super().__init__()
         self.name: str = name
         self.text_surface = None
         self.polygon: Polygon = polygon
         self.coords: list[tuple[int, int]] = []
         self.color = (0, 120, 0)
+        self.area_tap = area_tap
 
     def start(self, main_game):
-        self.text_surface = main_game.font.render(self.name, False, self.color)
+        # self.text_surface = main_game.font.render(self.name, False, self.color)
         self.set_game_polygon(main_game.screen)
-        print(self.polygon.centroid)
         self.position = (self.polygon.centroid.x, main_game.screen.height - self.polygon.centroid.y)
 
     def set_game_polygon(self, screen: Screen):
@@ -26,6 +26,11 @@ class AreaObject(GameObject):
             self.coords.append((coord[0], screen.height - coord[1]))
 
     def draw(self, main_game):
+        main_game.pygame.draw.polygon(main_game.window, self.color, self.coords)
+        # main_game.window.blit(self.text_surface, self.position)
 
-        main_game.pygame.draw.polygon(main_game.window, (0, 0, 150), self.coords)
-        main_game.window.blit(self.text_surface, self.position)
+    def on_event(self, main_game, event_position: tuple[int, int]):
+        tap_point = Point(event_position[0], main_game.screen.height - event_position[1])
+        if tap_point.within(self.polygon):
+            if self.area_tap is not None:
+                self.area_tap.on_tap(main_game, self)
