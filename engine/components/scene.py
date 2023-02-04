@@ -1,3 +1,5 @@
+from typing import Type
+
 from engine.components.game_object import GameObject
 
 
