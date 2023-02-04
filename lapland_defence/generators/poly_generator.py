@@ -1,6 +1,7 @@
 from engine.components.coordinates.screen import Screen
 import geopandas
 from lapland_defence.game_objects.game.municipality import Municipality
+from lapland_defence.generators.soldier_types import FactionType
 
 
 class PolyGenerator:
@@ -20,35 +21,47 @@ class PolyGenerator:
         print(data_fr.info())
         minx, miny, maxx, maxy = data_fr.total_bounds
 
-        width = maxx - minx
         height = maxy - miny
         scale = screen.height / height
-        # data_fr["game_x"] = (data_fr["geometry"].bounds["minx"] - minx) * scale
-        # data_fr["game_y"] = screen.height - (data_fr["geometry"].bounds["miny"] - miny) * scale
 
         miny_scaled = miny * scale
         minx_scaled = minx * scale
 
-        print(data_fr.loc[data_fr['nimi'] == 'Rovaniemi']["geometry"])
-        data_fr.geometry = data_fr.geometry.scale(xfact=scale, yfact=scale, zfact=1.0, origin=(-minx_scaled, -miny_scaled))
-
-        # data_fr["game_x"] = data_fr["geometry"].bounds["minx"]
-        # data_fr["game_y"] = screen.height - data_fr["geometry"].bounds["miny"]
-
-        print(data_fr.loc[data_fr['nimi'] == 'Rovaniemi']["geometry"])
-        # minx, miny, maxx, maxy = data_fr.total_bounds
-        # data_fr.geometry = data_fr.geometry.scale(xfact=1.0, yfact=1.0, zfact=1.0, origin=(minx, miny))
-
-        # data_fr.plot()
-        # plt.show()
+        data_fr.geometry = data_fr.geometry.scale(
+            xfact=scale, yfact=scale,
+            zfact=1.0,
+            origin=(-minx_scaled, -miny_scaled)
+        )
 
         for index, row in data_fr.iterrows():
-            area = Municipality(name=row["nimi"], polygon=row["geometry"])
-            # area.position = int(row['game_x']), int(row['game_y'])
-            print(f'{area.name} {area.position}')
-            # print(row["geometry"].geoms[0].bounds)
-            # print(row['centroid_column'].x)
-            # print(row['centroid_column'].y)
+            area = Municipality(name=row["nimi"], polygon=row["geometry"], faction=FactionType.PLAYER)
             areas.append(area)
 
+        self.set_faction_types(areas)
+
         return areas
+
+    def find_area(self, areas: list[Municipality], name: str):
+        for area in areas:
+            if area.name == name:
+                return area
+        return None
+
+    def set_faction_types(self, areas: list[Municipality]):
+        nda = self.find_area(areas=areas, name='Enontekiö')
+        nda.faction = FactionType.NDA
+        self.set_closest_types(areas=areas, base_area=nda)
+
+        sirpa = self.find_area(areas=areas, name='Kuusamo')
+        sirpa.faction = FactionType.SIRPA
+        self.set_closest_types(areas=areas, base_area=sirpa)
+
+        paula = self.find_area(areas=areas, name='Vaala')
+        paula.faction = FactionType.PAULA
+        self.set_closest_types(areas=areas, base_area=paula)
+
+    def set_closest_types(self, areas: list[Municipality], base_area: Municipality):
+        for area in areas:
+            print(area.polygon.distance(base_area.polygon))
+            if area.polygon.distance(base_area.polygon) < 1:
+                area.faction = base_area.faction
