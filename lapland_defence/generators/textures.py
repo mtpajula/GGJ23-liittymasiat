@@ -2,7 +2,20 @@ from lapland_defence.generators.soldier_types import SoldierType, FactionType
 
 
 def get_soldier_texture(soldier_type: SoldierType, faction: FactionType) -> str:
-    return 'assets/test.png'
+    if faction == FactionType.PLAYER:
+        if soldier_type == SoldierType.ROCK:
+            return 'assets/images/sled.png'
+        elif soldier_type == SoldierType.PAPER:
+            return 'assets/images/reindeer.png'
+        elif soldier_type == SoldierType.SCISSORS:
+            return 'assets/images/hunter.png'
+    else:
+        if soldier_type == SoldierType.ROCK:
+            return 'assets/images/dog.png'
+        elif soldier_type == SoldierType.PAPER:
+            return 'assets/images/drone.png'
+        elif soldier_type == SoldierType.SCISSORS:
+            return 'assets/images/robot.png'
 
 
 def get_mini_soldier_texture(soldier_type: SoldierType, faction: FactionType) -> str:

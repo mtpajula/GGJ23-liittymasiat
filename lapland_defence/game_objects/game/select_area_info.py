@@ -1,6 +1,6 @@
 from engine.components.game_object import GameObject
 from lapland_defence.generators.soldier_types import SoldierType
-from lapland_defence.generators.textures import get_mini_soldier_texture
+from lapland_defence.generators.textures import get_soldier_texture
 
 
 class SelectAreaInfo(GameObject):
@@ -26,13 +26,13 @@ class SelectAreaInfo(GameObject):
             self.text_surface_scissors = main_game.font.render(f'{counts[SoldierType.SCISSORS]}', False, (255, 255, 255))
 
             self.image_surface_rock = main_game.pygame.image.load(
-                get_mini_soldier_texture(soldier_type=SoldierType.ROCK, faction=main_game.active_area.faction)
+                get_soldier_texture(soldier_type=SoldierType.ROCK, faction=main_game.active_area.faction)
             )
             self.image_surface_paper = main_game.pygame.image.load(
-                get_mini_soldier_texture(soldier_type=SoldierType.PAPER, faction=main_game.active_area.faction)
+                get_soldier_texture(soldier_type=SoldierType.PAPER, faction=main_game.active_area.faction)
             )
             self.image_surface_scissors = main_game.pygame.image.load(
-                get_mini_soldier_texture(soldier_type=SoldierType.SCISSORS, faction=main_game.active_area.faction)
+                get_soldier_texture(soldier_type=SoldierType.SCISSORS, faction=main_game.active_area.faction)
             )
 
     def draw(self, main_game):
@@ -41,13 +41,13 @@ class SelectAreaInfo(GameObject):
                 self.start(main_game)
                 self.update = False
             main_game.window.blit(self.text_surface_info, (self.position[0], self.position[1]))
-            main_game.window.blit(self.text_surface_rock, (self.position[0]+20, self.position[1] + 20))
-            main_game.window.blit(self.text_surface_paper, (self.position[0]+20, self.position[1] + 40))
-            main_game.window.blit(self.text_surface_scissors, (self.position[0]+20, self.position[1] + 60))
+            main_game.window.blit(self.text_surface_rock, (self.position[0]+60, self.position[1] + 55))
+            main_game.window.blit(self.text_surface_paper, (self.position[0]+60, self.position[1] + 95))
+            main_game.window.blit(self.text_surface_scissors, (self.position[0]+60, self.position[1] + 135))
 
-            main_game.window.blit(self.image_surface_rock, (self.position[0], self.position[1] + 20))
-            main_game.window.blit(self.image_surface_paper, (self.position[0], self.position[1] + 40))
-            main_game.window.blit(self.image_surface_scissors, (self.position[0], self.position[1] + 60))
+            main_game.window.blit(self.image_surface_rock, (self.position[0], self.position[1] + 40))
+            main_game.window.blit(self.image_surface_paper, (self.position[0], self.position[1] + 80))
+            main_game.window.blit(self.image_surface_scissors, (self.position[0], self.position[1] + 120))
 
     def close(self, main_game):
         pass
