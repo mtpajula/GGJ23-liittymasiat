@@ -17,7 +17,7 @@ import lapland_defence.utils as utils
 class LaplandDefence(MainGame):
 
     def __init__(self):
-        super().__init__(start_scene='intro')
+        super().__init__(start_scene='start')
         self.scenes: dict[str, Scene] = {
             'start': StartScene(),
             'intro': IntroductionScene(),

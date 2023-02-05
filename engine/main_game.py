@@ -14,6 +14,7 @@ class MainGame:
         self.pygame = pygame
         self.window = None
         self.font = None
+        self.heading_font = None
 
     def draw(self):
         """
@@ -46,7 +47,8 @@ class MainGame:
         self.pygame.init()
         self.window = self.pygame.display.set_mode((self.screen.width, self.screen.height))
         self.pygame.font.init()
-        self.font = pygame.font.SysFont('Comic Sans MS', 30)
+        self.font = pygame.font.SysFont('Consolas', 20)
+        self.heading_font = pygame.font.SysFont('Consolas', 40)
 
         self.start_scene()
         self.loop()

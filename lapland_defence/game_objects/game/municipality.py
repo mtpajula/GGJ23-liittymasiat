@@ -41,6 +41,7 @@ class Municipality(AreaObject):
     def draw(self, main_game):
         super().draw(main_game)
 
+    def draw_soldiers(self, main_game):
         for i, soldier in enumerate(self.soldiers):
             soldier.position = (self.position[0] + i * 5, self.position[1] + i * 5)
             soldier.draw(main_game)

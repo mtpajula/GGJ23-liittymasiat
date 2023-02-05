@@ -8,9 +8,11 @@ class TextObject(GameObject):
         self.text_surface = None
         self.text: str = text
         self.color = (255, 255, 255)
+        self.heading = False
 
     def start(self, main_game):
-        self.text_surface = main_game.font.render(self.text, False, self.color)
+        font = main_game.heading_font if self.heading else main_game.font
+        self.text_surface = font.render(self.text, False, self.color)
 
     def draw(self, main_game):
         main_game.window.blit(self.text_surface, self.position)

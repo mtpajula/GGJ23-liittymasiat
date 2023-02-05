@@ -6,6 +6,7 @@ class GameTitle(TextObject):
 
     def __init__(self):
         super().__init__('Lapland 2053 defense')
+        self.heading = True
 
     def start(self, main_game: MainGame):
         super().start(main_game)

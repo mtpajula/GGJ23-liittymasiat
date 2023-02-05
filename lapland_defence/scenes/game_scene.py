@@ -14,11 +14,12 @@ class GameScene(Scene):
         self.poly_generator = PolyGenerator('assets/lappi1milj_simple.geojson')
         self.soldier_generator = SoldierGenerator()
         self.enable_user_input = True
+        self.areas = []
 
     def start(self, main_game):
-        areas = self.poly_generator.generate(main_game.screen)
-        self.soldier_generator.generate(areas=areas)
-        self.objects.extend(areas)
+        self.areas = self.poly_generator.generate(main_game.screen)
+        self.soldier_generator.generate(areas=self.areas)
+        self.objects.extend(self.areas)
         super().start(main_game)
 
     def draw(self, main_game):
