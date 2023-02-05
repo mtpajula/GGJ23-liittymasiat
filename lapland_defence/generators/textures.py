@@ -19,7 +19,7 @@ def get_mini_soldier_texture(soldier_type: SoldierType, faction: FactionType) ->
         elif soldier_type == SoldierType.PAPER:
             return 'assets/images/mini_drone.png'
         elif soldier_type == SoldierType.SCISSORS:
-            return 'assets/images/mini_robodog.png'
+            return 'assets/images/mini_chat.png'
 
 
 def get_faction_logo(faction: FactionType) -> str:
