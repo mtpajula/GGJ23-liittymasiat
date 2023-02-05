@@ -75,5 +75,5 @@ class PolyGenerator:
     def set_closest_types(self, areas: list[Municipality], base_area: Municipality):
         for area in areas:
             # print(area.polygon.distance(base_area.polygon))
-            if area.polygon.distance(base_area.polygon) < 1:
+            if area.polygon.distance(base_area.polygon) < 0:
                 area.faction = base_area.faction

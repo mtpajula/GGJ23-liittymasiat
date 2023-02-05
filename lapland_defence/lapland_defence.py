@@ -66,7 +66,11 @@ class LaplandDefence(MainGame):
                 # Only non-player faction areas can be set as target
                 if area.faction == self.turn:
                     # print('Prevent player area as target')
+                    self.target_area = area
+                    self.target_area.set_target(self, True)
+                    self.move_troops()
                     return
+
                 if area.polygon.distance(self.active_area.polygon) < 0.1:
                     # print(f'set {area.name} to target')
                     self.target_area = area
@@ -99,6 +103,17 @@ class LaplandDefence(MainGame):
 
                 if self.game_over():
                     self.change_scene('end')
+
+    def move_troops(self):
+        self.fight_logic.move(attacker=self.active_area, defender=self.target_area)
+        self.active_area.set_active(self, False)
+        self.target_area.set_target(self, False)
+        self.target_area.target = False
+        self.active_area = None
+        self.target_area = None
+
+        self.change_faction()
+        self.game_scene.on_game_event(self, (0, 0))
 
     def solve_fight(self):
         self.fight_logic.fight(attacker=self.active_area, defender=self.target_area)
