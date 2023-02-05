@@ -18,7 +18,6 @@ class SoundManager:
 
         self.music = {
             # Better not forget this as final BG music. Delete file and burn computer before release
-            'carnival': 'assets/music/FacelessCarnival.ogg',
             'game': 'assets/music/lapland2035gameplay.mp3',
         }
 
