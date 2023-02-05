@@ -10,13 +10,22 @@ class InfoText(TextObject):
 
     def start(self, main_game):
         self.current_turn = main_game.turn
-        self.text = f'Turn {self.current_turn}'
+        self.text = f'Vuorossa {self.get_faction_name(self.current_turn)}'
         super().start(main_game)
-        self.position = main_game.screen.location(left=900, top=10)
+        self.position = main_game.screen.location(left=900, top=300)
         # self.bounds = (500, 100)
 
     def draw(self, main_game):
         if self.current_turn != main_game.turn:
             self.start(main_game)
-        self.text = f'Turn {main_game.turn}'
         super().draw(main_game)
+
+    def get_faction_name(self, faction: FactionType) -> str:
+        if faction == FactionType.PLAYER:
+            return 'Lappilaiset'
+        elif faction == FactionType.P23G:
+            return '23G'
+        elif faction == FactionType.LOL:
+            return 'LOL'
+        elif faction == FactionType.PIRJO:
+            return 'PIRJO'

@@ -17,7 +17,7 @@ import lapland_defence.utils as utils
 class LaplandDefence(MainGame):
 
     def __init__(self):
-        super().__init__(start_scene='start')
+        super().__init__(start_scene='game')
         self.scenes: dict[str, Scene] = {
             'start': StartScene(),
             'intro': IntroductionScene(),
@@ -36,6 +36,8 @@ class LaplandDefence(MainGame):
         self.turn: FactionType = FactionType.PLAYER
         self.active_animation = None
         self.fight_logic: FightLogic = FightLogic()
+
+        self.pygame.display.set_caption('Lapland 2053 defence')
 
     def select_area(self, area: Municipality):
 
@@ -88,8 +90,8 @@ class LaplandDefence(MainGame):
             self.game_scene.enable_user_input = False
             animation_running = self.active_animation.draw(self)
             if not animation_running:
-                self.solve_fight()
                 self.active_animation = None
+                self.solve_fight()
 
     def solve_fight(self):
         self.fight_logic.fight(attacker=self.active_area, defender=self.target_area)

@@ -1,5 +1,6 @@
 from engine.components.scene import Scene
 from lapland_defence.game_objects.game.info_text import InfoText
+from lapland_defence.game_objects.game.logo_image import LogoImage
 from lapland_defence.generators.poly_generator import PolyGenerator
 from lapland_defence.generators.soldier_generator import SoldierGenerator
 
@@ -9,6 +10,7 @@ class GameScene(Scene):
     def __init__(self):
         super().__init__()
         self.objects: list = [
+            LogoImage(),
             InfoText()
         ]
         self.poly_generator = PolyGenerator('assets/lappi1milj_simple.geojson')

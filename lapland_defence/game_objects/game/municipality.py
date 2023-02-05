@@ -19,11 +19,11 @@ class Municipality(AreaObject):
         if self.faction == FactionType.PLAYER:
             self.color = (100, 150, 0)
         if self.faction == FactionType.P23G:
-            self.color = (0, 100, 0)
+            self.color = (220, 94, 242)
         if self.faction == FactionType.LOL:
-            self.color = (0, 120, 100)
+            self.color = (37, 51, 128)
         if self.faction == FactionType.PIRJO:
-            self.color = (100, 100, 0)
+            self.color = (117, 23, 122)
 
         if self.active:
             self.color = (255, 0, 0)
