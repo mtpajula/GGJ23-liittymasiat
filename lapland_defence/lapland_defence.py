@@ -5,6 +5,7 @@ from engine.main_game import MainGame
 from lapland_defence.animations.fight_animation import FightAnimation
 from lapland_defence.fight_logic import FightLogic
 from lapland_defence.game_objects.game.municipality import Municipality
+from lapland_defence.scenes.end_scene import EndScene
 from lapland_defence.scenes.game_scene import GameScene
 from lapland_defence.scenes.introduction_scene import IntroductionScene
 from lapland_defence.scenes.start_scene import StartScene
@@ -21,7 +22,8 @@ class LaplandDefence(MainGame):
         self.scenes: dict[str, Scene] = {
             'start': StartScene(),
             'intro': IntroductionScene(),
-            'game': GameScene()
+            'game': GameScene(),
+            'end': EndScene()
         }
         self.game_scene: GameScene = cast(GameScene, self.scenes['game'])
         self.active_area: Optional[Municipality] = None
@@ -95,6 +97,9 @@ class LaplandDefence(MainGame):
                 self.active_animation = None
                 self.solve_fight()
 
+                if self.game_over():
+                    self.change_scene('end')
+
     def solve_fight(self):
         self.fight_logic.fight(attacker=self.active_area, defender=self.target_area)
         self.active_area.set_active(self, False)
@@ -103,8 +108,24 @@ class LaplandDefence(MainGame):
         self.active_area = None
         self.target_area = None
 
+        self.find_losers()
+
         self.change_faction()
         self.game_scene.on_game_event(self, (0, 0))
+
+    def find_losers(self):
+        area_count = self.game_scene.count_areas()
+        if area_count[FactionType.PLAYER] == 0 and FactionType.PLAYER not in self.lost_factions:
+            self.lost_factions.append(FactionType.PLAYER)
+        if area_count[FactionType.PIRJO] == 0 and FactionType.PIRJO not in self.lost_factions:
+            self.lost_factions.append(FactionType.PIRJO)
+        if area_count[FactionType.P23G] == 0 and FactionType.P23G not in self.lost_factions:
+            self.lost_factions.append(FactionType.P23G)
+        if area_count[FactionType.LOL] == 0 and FactionType.LOL not in self.lost_factions:
+            self.lost_factions.append(FactionType.LOL)
+
+    def game_over(self) -> bool:
+        return len(self.lost_factions) == 3
 
     def change_faction(self):
         if self.turn == FactionType.PLAYER:
