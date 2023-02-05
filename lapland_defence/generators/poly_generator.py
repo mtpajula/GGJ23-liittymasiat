@@ -1,6 +1,7 @@
 from engine.components.coordinates.screen import Screen
-import geopandas
+# import geopandas
 from lapland_defence.game_objects.game.municipality import Municipality
+from lapland_defence.generators.save_polys import SavePolys
 from lapland_defence.generators.soldier_types import FactionType
 
 
@@ -9,33 +10,44 @@ class PolyGenerator:
     def __init__(self, data_path):
         self.data_path: str = data_path
 
-    def load_data(self):
-        return geopandas.read_file(self.data_path)
+    # def load_data(self):
+    #     return geopandas.read_file(self.data_path)
 
     def generate(self, screen: Screen) -> list[Municipality]:
         areas = []
-        print("generate poly")
-        data_fr = self.load_data()
-        data_fr['centroid_column'] = data_fr.centroid
 
-        print(data_fr.info())
-        minx, miny, maxx, maxy = data_fr.total_bounds
+        loaded_areas = SavePolys.load('assets/areas.dump')
 
-        height = maxy - miny
-        scale = screen.height / height
+        if loaded_areas is None:
+            print("generate poly")
+            """
+            data_fr = self.load_data()
+            data_fr['centroid_column'] = data_fr.centroid
 
-        miny_scaled = miny * scale
-        minx_scaled = minx * scale
+            print(data_fr.info())
+            minx, miny, maxx, maxy = data_fr.total_bounds
 
-        data_fr.geometry = data_fr.geometry.scale(
-            xfact=scale, yfact=scale,
-            zfact=1.0,
-            origin=(-minx_scaled, -miny_scaled)
-        )
+            height = maxy - miny
+            scale = screen.height / height
 
-        for index, row in data_fr.iterrows():
-            area = Municipality(name=row["nimi"], polygon=row["geometry"], faction=FactionType.PLAYER)
-            areas.append(area)
+            miny_scaled = miny * scale
+            minx_scaled = minx * scale
+
+            data_fr.geometry = data_fr.geometry.scale(
+                xfact=scale, yfact=scale,
+                zfact=1.0,
+                origin=(-minx_scaled, -miny_scaled)
+            )
+
+            for index, row in data_fr.iterrows():
+                area = Municipality(name=row["nimi"], polygon=row["geometry"], faction=FactionType.PLAYER)
+                areas.append(area)
+
+            SavePolys.save('assets/areas.dump', areas)
+            """
+        else:
+            print("load areas from pickle")
+            areas = loaded_areas
 
         self.set_faction_types(areas)
 
