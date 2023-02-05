@@ -53,10 +53,14 @@ class MainGame:
 
     def change_scene(self, scene: str):
         print(f'change scene to {scene}')
+        self.close_scene()
         self.current_scene = scene
         self.start_scene()
 
-    def close(self):
+    def close_scene(self):
         self.scenes[self.current_scene].close(self)
+
+    def close(self):
+        self.close_scene()
         self.run = False
 
