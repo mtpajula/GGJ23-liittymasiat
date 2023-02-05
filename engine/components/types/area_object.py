@@ -26,6 +26,7 @@ class AreaObject(GameObject):
 
     def draw(self, main_game):
         main_game.pygame.draw.polygon(main_game.window, self.color, self.coords)
+        main_game.pygame.draw.polygon(main_game.window, (255,255,255), self.coords, 3)
         # main_game.window.blit(self.text_surface, self.position)
 
     def on_bounds_event(self, main_game):
