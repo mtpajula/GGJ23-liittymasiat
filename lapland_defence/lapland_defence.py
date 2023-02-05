@@ -7,6 +7,8 @@ from lapland_defence.scenes.game_scene import GameScene
 from lapland_defence.scenes.introduction_scene import IntroductionScene
 from lapland_defence.scenes.start_scene import StartScene
 from lapland_defence.generators.soldier_types import FactionType
+from engine.soundmanager import SoundManager
+import lapland_defence.utils as utils
 
 
 
@@ -21,6 +23,13 @@ class LaplandDefence(MainGame):
         }
         self.active_area: Optional[Municipality] = None
         self.target_area: Optional[Municipality] = None
+
+        # initialize sound manager
+        utils.soundManager = SoundManager()
+
+        # TODO: Failed loading libvorbisfile-3.dll: The specified module could not be found.
+        # utils.soundManager.play_music('carnival')
+
 
     def select_area(self, area: Municipality):
 
@@ -37,6 +46,7 @@ class LaplandDefence(MainGame):
             print(f'set {area.name} to active')
             self.active_area = area
             self.active_area.set_active(self, True)
+            utils.soundManager.play_sound('select')
         else:
             if self.target_area is None:
                 # Only non-player faction areas can be set as target
@@ -48,6 +58,7 @@ class LaplandDefence(MainGame):
                     self.target_area = area
                     self.target_area.set_target(self, True)
                     self.attack()
+                    utils.soundManager.play_sound('attack')
             else:
                 print(f'clear all areas')
                 self.active_area.set_active(self, False)
