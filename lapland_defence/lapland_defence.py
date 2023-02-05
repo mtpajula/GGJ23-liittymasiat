@@ -104,6 +104,7 @@ class LaplandDefence(MainGame):
         self.target_area = None
 
         self.change_faction()
+        self.game_scene.on_game_event(self, (0, 0))
 
     def change_faction(self):
         if self.turn == FactionType.PLAYER:

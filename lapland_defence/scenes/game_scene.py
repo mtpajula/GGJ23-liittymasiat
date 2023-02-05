@@ -1,5 +1,6 @@
 from engine.components.scene import Scene
 from lapland_defence import utils
+from lapland_defence.game_objects.game.area_info import AreaInfo
 from lapland_defence.game_objects.game.info_text import InfoText
 from lapland_defence.game_objects.game.logo_image import LogoImage
 from lapland_defence.game_objects.game.select_area_info import SelectAreaInfo
@@ -15,7 +16,8 @@ class GameScene(Scene):
         self.objects: list = [
             LogoImage(),
             InfoText(),
-            SelectAreaInfo()
+            SelectAreaInfo(),
+            AreaInfo()
         ]
         self.poly_generator = PolyGenerator('assets/lappi1milj_simple.geojson')
         self.soldier_generator = SoldierGenerator()
@@ -41,21 +43,27 @@ class GameScene(Scene):
         else:
             print('GameScene: User input disabled')
 
-    def count_municipalities(self):
+    def on_game_event(self, main_game, position: tuple[int, int]):
+        super().on_event(main_game, position)
+
+    def count_areas(self):
         player = 0
         p23g = 0
-        scissors = 0
+        lol = 0
+        pirjo = 0
 
         for area in self.areas:
             if area.faction == FactionType.PLAYER:
                 player += 1
-            elif area.faction == FactionType.PLAYER:
-                papers += 1
-            elif area.faction == FactionType.PLAYER:
-                scissors += 1
+            elif area.faction == FactionType.P23G:
+                p23g += 1
+            elif area.faction == FactionType.LOL:
+                lol += 1
+            elif area.faction == FactionType.PIRJO:
+                pirjo += 1
         return {
             FactionType.PLAYER: player,
-            FactionType.P23G: player,
-            FactionType.LOL: player,
-            FactionType.PIRJO: player
+            FactionType.P23G: p23g,
+            FactionType.LOL: lol,
+            FactionType.PIRJO: pirjo
         }
