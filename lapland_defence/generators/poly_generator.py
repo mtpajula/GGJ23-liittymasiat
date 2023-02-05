@@ -1,5 +1,5 @@
 from engine.components.coordinates.screen import Screen
-# import geopandas
+import geopandas
 from lapland_defence.game_objects.game.municipality import Municipality
 from lapland_defence.generators.save_polys import SavePolys
 from lapland_defence.generators.soldier_types import FactionType
@@ -10,8 +10,8 @@ class PolyGenerator:
     def __init__(self, data_path):
         self.data_path: str = data_path
 
-    # def load_data(self):
-    #     return geopandas.read_file(self.data_path)
+    def load_data(self):
+        return geopandas.read_file(self.data_path)
 
     def generate(self, screen: Screen) -> list[Municipality]:
         areas = []
@@ -20,7 +20,7 @@ class PolyGenerator:
 
         if loaded_areas is None:
             print("generate poly")
-            """
+
             data_fr = self.load_data()
             data_fr['centroid_column'] = data_fr.centroid
 
@@ -44,7 +44,7 @@ class PolyGenerator:
                 areas.append(area)
 
             SavePolys.save('assets/areas.dump', areas)
-            """
+
         else:
             print("load areas from pickle")
             areas = loaded_areas
