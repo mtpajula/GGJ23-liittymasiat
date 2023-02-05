@@ -2,7 +2,7 @@ from shapely import Polygon
 
 from engine.components.types.area_object import AreaObject
 from lapland_defence.game_objects.game.soldier import Soldier
-from lapland_defence.generators.soldier_types import FactionType
+from lapland_defence.generators.soldier_types import FactionType, SoldierType
 
 
 class Municipality(AreaObject):
@@ -42,8 +42,19 @@ class Municipality(AreaObject):
         super().draw(main_game)
 
     def draw_soldiers(self, main_game):
+        rocks = 0
+        papers = 0
+        scissords = 0
         for i, soldier in enumerate(self.soldiers):
-            soldier.position = (self.position[0] + i * 5 - 40, self.position[1] + i * 5 - 40)
+            if soldier.type == SoldierType.ROCK:
+                soldier.position = (self.position[0]-40, self.position[1] - rocks * 5)
+                rocks += 1
+            elif soldier.type == SoldierType.PAPER:
+                soldier.position = (self.position[0]-20, self.position[1] - papers * 5)
+                papers += 1
+            elif soldier.type == SoldierType.SCISSORS:
+                soldier.position = (self.position[0], self.position[1] - scissords * 5)
+                scissords += 1
             soldier.draw(main_game)
 
     def set_active(self, main_game, value: bool):
