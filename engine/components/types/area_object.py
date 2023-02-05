@@ -25,7 +25,9 @@ class AreaObject(GameObject):
             self.coords.append((coord[0], screen.height - coord[1]))
 
     def draw(self, main_game):
+        # Draw municipality color
         main_game.pygame.draw.polygon(main_game.window, self.color, self.coords)
+        # Draw white border
         main_game.pygame.draw.polygon(main_game.window, (255,255,255), self.coords, 3)
         # main_game.window.blit(self.text_surface, self.position)
 
