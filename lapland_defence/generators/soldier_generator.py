@@ -12,9 +12,11 @@ class SoldierGenerator:
         return Soldier(soldier_type=s_type, faction=faction)
 
     def generate_into_municipality(self, municipality: Municipality):
-        for i in range(0, random.randint(0, 9)):
+        municipality.soldiers = []
+        for i in range(1, random.randint(1, 8)):
             soldier = self.get_random_type(municipality.faction)
             municipality.soldiers.append(soldier)
+        print(f'soldiers in {municipality.name}: {len(municipality.soldiers)}')
 
     def generate(self, areas: list):
         for area in areas:

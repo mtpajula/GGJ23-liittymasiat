@@ -12,7 +12,8 @@ class SoundManager:
         self.sounds = {
             'select': pygame.mixer.Sound('assets/sounds/select.wav'),
             'attack': pygame.mixer.Sound('assets/sounds/attack.wav'),
-            'intro': pygame.mixer.Sound('assets/music/lapland2035gameplay.mp3')
+            'start': pygame.mixer.Sound('assets/music/lapland2035gameplay.mp3'),
+            'intro': pygame.mixer.Sound('assets/music/lapland_audio.mp3')
         }
 
         self.music = {

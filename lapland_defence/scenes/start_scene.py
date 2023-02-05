@@ -17,8 +17,8 @@ class StartScene(Scene):
 
     def start(self, main_game):
         super().start(main_game)
-        utils.soundManager.play_sound('intro')
+        utils.soundManager.play_sound('start')
 
     def close(self, main_game):
-        utils.soundManager.sounds['intro'].stop()
+        utils.soundManager.sounds['start'].stop()
         super().close(main_game)

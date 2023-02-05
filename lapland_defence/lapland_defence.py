@@ -18,7 +18,7 @@ import lapland_defence.utils as utils
 class LaplandDefence(MainGame):
 
     def __init__(self):
-        super().__init__(start_scene='end')
+        super().__init__(start_scene='start')
         self.scenes: dict[str, Scene] = {
             'start': StartScene(),
             'intro': IntroductionScene(),
@@ -147,8 +147,6 @@ class LaplandDefence(MainGame):
             self.turn = FactionType.PLAYER
             if self.turn not in self.lost_factions:
                 return
-
-        print(self.turn)
 
     def winner(self) -> FactionType:
         area_count = self.game_scene.count_areas()

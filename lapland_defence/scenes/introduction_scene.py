@@ -4,7 +4,7 @@ import cv2
 
 from lapland_defence import utils
 
-video = cv2.VideoCapture("assets/videos/test.mp4")
+video = cv2.VideoCapture("assets/videos/intro_lapland.mp4")
 success, video_image = video.read()
 fps = video.get(cv2.CAP_PROP_FPS)
 
@@ -23,16 +23,17 @@ class IntroductionScene(Scene):
         utils.soundManager.play_sound('intro')
 
     def draw(self, main_game):
-        # main_game.window.fill((255, 255, 255))
+        main_game.window.fill((0, 0, 0))
         self.clock.tick(fps)
         success, video_image = video.read()
         if success:
             video_surf = main_game.pygame.image.frombuffer(
                 video_image.tobytes(), video_image.shape[1::-1], "BGR")
 
-            main_game.window.blit(video_surf, (0, 0))
+            main_game.window.blit(video_surf, (100, 0))
         else:
             print("no video")
+            main_game.change_scene('game')
 
         super().draw(main_game)
 

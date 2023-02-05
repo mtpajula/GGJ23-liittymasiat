@@ -9,7 +9,7 @@ class FightLogic:
             defender.soldiers = attacker.soldiers.copy()
             for soldier in defender.soldiers:
                 soldier.faction = attacker.faction
-            attacker.soldiers = attacker.soldiers[1:]
+            attacker.soldiers = attacker.soldiers[:1]
             return True
         return False
 

@@ -37,5 +37,4 @@ class AreaInfo(GameObject):
         pass
 
     def on_event(self, main_game, event_position: tuple[int, int]):
-        print("event")
         self.update = True
