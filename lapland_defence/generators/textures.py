@@ -12,7 +12,7 @@ def get_mini_soldier_texture(soldier_type: SoldierType, faction: FactionType) ->
         elif soldier_type == SoldierType.PAPER:
             return 'assets/images/mini_reindeer.png'
         elif soldier_type == SoldierType.SCISSORS:
-            return 'assets/images/mini_reindeer.png'
+            return 'assets/images/mini_hunter.png'
     else:
         if soldier_type == SoldierType.ROCK:
             return 'assets/images/mini_robodog.png'
