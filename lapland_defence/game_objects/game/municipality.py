@@ -44,7 +44,7 @@ class Municipality(AreaObject):
     def draw_soldiers(self, main_game):
         rocks = 0
         papers = 0
-        scissords = 0
+        scissors = 0
         for i, soldier in enumerate(self.soldiers):
             if soldier.type == SoldierType.ROCK:
                 soldier.position = (self.position[0]-40, self.position[1] - rocks * 5)
@@ -53,8 +53,8 @@ class Municipality(AreaObject):
                 soldier.position = (self.position[0]-20, self.position[1] - papers * 5)
                 papers += 1
             elif soldier.type == SoldierType.SCISSORS:
-                soldier.position = (self.position[0], self.position[1] - scissords * 5)
-                scissords += 1
+                soldier.position = (self.position[0], self.position[1] - scissors * 5)
+                scissors += 1
             soldier.draw(main_game)
 
     def set_active(self, main_game, value: bool):
@@ -70,3 +70,20 @@ class Municipality(AreaObject):
     def on_bounds_event(self, main_game):
         main_game.select_area(self)
         # print(f'{self.name} color to {self.color}')
+
+    def count_soldiers(self) -> dict:
+        rocks = 0
+        papers = 0
+        scissors = 0
+        for soldier in self.soldiers:
+            if soldier.type == SoldierType.ROCK:
+                rocks += 1
+            elif soldier.type == SoldierType.PAPER:
+                papers += 1
+            elif soldier.type == SoldierType.SCISSORS:
+                scissors += 1
+        return {
+            SoldierType.ROCK: rocks,
+            SoldierType.PAPER: papers,
+            SoldierType.SCISSORS: scissors,
+        }

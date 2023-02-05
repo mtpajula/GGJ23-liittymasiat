@@ -39,6 +39,8 @@ class LaplandDefence(MainGame):
 
         self.pygame.display.set_caption('Lapland 2053 defence')
 
+        self.lost_factions = []
+
     def select_area(self, area: Municipality):
 
         # Area is already active
@@ -106,10 +108,22 @@ class LaplandDefence(MainGame):
     def change_faction(self):
         if self.turn == FactionType.PLAYER:
             self.turn = FactionType.P23G
-        elif self.turn == FactionType.P23G:
+            if self.turn not in self.lost_factions:
+                return
+
+        if self.turn == FactionType.P23G:
             self.turn = FactionType.LOL
-        elif self.turn == FactionType.LOL:
+            if self.turn not in self.lost_factions:
+                return
+
+        if self.turn == FactionType.LOL:
             self.turn = FactionType.PIRJO
-        elif self.turn == FactionType.PIRJO:
+            if self.turn not in self.lost_factions:
+                return
+
+        if self.turn == FactionType.PIRJO:
             self.turn = FactionType.PLAYER
+            if self.turn not in self.lost_factions:
+                return
+
         print(self.turn)

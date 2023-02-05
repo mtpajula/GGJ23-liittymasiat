@@ -12,13 +12,13 @@ class SoundManager:
         self.sounds = {
             'select': pygame.mixer.Sound('assets/sounds/select.wav'),
             'attack': pygame.mixer.Sound('assets/sounds/attack.wav'),
-            'intro': pygame.mixer.Sound('assets/music/music.mp3')
+            'intro': pygame.mixer.Sound('assets/music/lapland2035gameplay.mp3')
         }
 
         self.music = {
             # Better not forget this as final BG music. Delete file and burn computer before release
             'carnival': 'assets/music/FacelessCarnival.ogg',
-            'test': 'assets/music/music.mp3',
+            'game': 'assets/music/lapland2035gameplay.mp3',
         }
 
     def play_sound(self, sound_name):
