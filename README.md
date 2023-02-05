@@ -1,10 +1,10 @@
-# GGJ23-liittymasiat
+# Lapland 2053 defence
 
+## Run source code
 
-## Todo
+ * Install requirements in requirements.txt
+ * Run start.py
 
- * Prevent active click on rival factions
-   * Done for the player -Pettis
- * Prevent target select on own faction
-   * Done for the player -Pettis
+## Run premade build
 
+Unzip start.py in repo root. In folder, start start.exe
