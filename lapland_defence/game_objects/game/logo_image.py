@@ -10,6 +10,7 @@ class LogoImage(UnitObject):
         self.current_turn: FactionType = FactionType.PLAYER
 
     def start(self, main_game):
+        self.current_turn = main_game.turn
         self.texture = get_faction_logo(main_game.turn)
         super().start(main_game)
         self.position = main_game.screen.location(left=900, top=0)
