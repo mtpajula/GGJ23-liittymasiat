@@ -25,6 +25,8 @@ class GameScene(Scene):
     def draw(self, main_game):
         main_game.window.fill((0, 0, 0))
         super().draw(main_game)
+        for area in self.areas:
+            area.draw_soldiers(main_game)
 
     def on_event(self, main_game, position: tuple[int, int]):
         if self.enable_user_input:

@@ -43,7 +43,7 @@ class Municipality(AreaObject):
 
     def draw_soldiers(self, main_game):
         for i, soldier in enumerate(self.soldiers):
-            soldier.position = (self.position[0] + i * 5, self.position[1] + i * 5)
+            soldier.position = (self.position[0] + i * 5 - 40, self.position[1] + i * 5 - 40)
             soldier.draw(main_game)
 
     def set_active(self, main_game, value: bool):
