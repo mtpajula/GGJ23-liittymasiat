@@ -1,8 +1,11 @@
 from engine.components.scene import Scene
 from lapland_defence import utils
+from lapland_defence.game_objects.end.credits import Credits
+from lapland_defence.game_objects.end.end_game_title import EndGameTitle
+from lapland_defence.game_objects.end.end_image import EndImage
 from lapland_defence.game_objects.end.restart_game import RestartGame
-from lapland_defence.game_objects.start.game_title import GameTitle
-from lapland_defence.game_objects.start.start_image import StartImage
+from lapland_defence.game_objects.end.winner_text import WinnerText
+
 
 
 class EndScene(Scene):
@@ -10,9 +13,11 @@ class EndScene(Scene):
     def __init__(self):
         super().__init__()
         self.objects: list = [
-            StartImage(),
+            EndImage(),
             RestartGame(),
-            GameTitle(),
+            EndGameTitle(),
+            Credits(),
+            WinnerText()
         ]
 
     def start(self, main_game):

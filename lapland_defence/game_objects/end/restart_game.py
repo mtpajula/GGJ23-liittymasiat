@@ -10,7 +10,7 @@ class RestartGame(TextObject):
 
     def start(self, main_game: MainGame):
         super().start(main_game)
-        self.position = main_game.screen.location(left=400, top=500)
+        self.position = main_game.screen.location(left=300, top=900)
         self.bounds = (500, 100)
 
     def draw(self, main_game):

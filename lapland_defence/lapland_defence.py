@@ -18,7 +18,7 @@ import lapland_defence.utils as utils
 class LaplandDefence(MainGame):
 
     def __init__(self):
-        super().__init__(start_scene='game')
+        super().__init__(start_scene='end')
         self.scenes: dict[str, Scene] = {
             'start': StartScene(),
             'intro': IntroductionScene(),
@@ -149,3 +149,19 @@ class LaplandDefence(MainGame):
                 return
 
         print(self.turn)
+
+    def winner(self) -> FactionType:
+        area_count = self.game_scene.count_areas()
+        most: int = area_count[FactionType.PLAYER]
+        winner: FactionType = FactionType.PLAYER
+
+        if area_count[FactionType.PIRJO] >= most:
+            winner = FactionType.PIRJO
+            most = area_count[FactionType.PIRJO]
+        if area_count[FactionType.P23G] >= most:
+            winner = FactionType.P23G
+            most = area_count[FactionType.P23G]
+        if area_count[FactionType.LOL] >= most:
+            winner = FactionType.LOL
+
+        return winner

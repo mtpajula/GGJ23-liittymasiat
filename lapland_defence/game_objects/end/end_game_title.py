@@ -2,7 +2,7 @@ from engine.components.types.text_object import TextObject
 from engine.main_game import MainGame
 
 
-class GameTitle(TextObject):
+class EndGameTitle(TextObject):
 
     def __init__(self):
         super().__init__('Lapland 2053 defense')
@@ -10,4 +10,4 @@ class GameTitle(TextObject):
 
     def start(self, main_game: MainGame):
         super().start(main_game)
-        self.position = main_game.screen.location(left=200, top=200)
+        self.position = main_game.screen.location(left=600, top=100)
