@@ -7,4 +7,4 @@
 
 ## Run premade build
 
-Unzip start.py in repo root. In folder, start start.exe
+Unzip start.zip in repo root. In folder, start start.exe
