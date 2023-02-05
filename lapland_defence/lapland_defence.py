@@ -49,9 +49,9 @@ class LaplandDefence(MainGame):
         if self.active_area is None:
             # only player area can be set as active area
             if area.faction != self.turn:
-                print('Prevent enemy area as active area')
+                # print('Prevent enemy area as active area')
                 return
-            print(f'set {area.name} to active')
+            # print(f'set {area.name} to active')
             self.active_area = area
             self.active_area.set_active(self, True)
             utils.soundManager.play_sound('select')
@@ -59,15 +59,15 @@ class LaplandDefence(MainGame):
             if self.target_area is None:
                 # Only non-player faction areas can be set as target
                 if area.faction == self.turn:
-                    print('Prevent player area as target')
+                    # print('Prevent player area as target')
                     return
                 if area.polygon.distance(self.active_area.polygon) < 0.1:
-                    print(f'set {area.name} to target')
+                    # print(f'set {area.name} to target')
                     self.target_area = area
                     self.target_area.set_target(self, True)
                     self.attack()
             else:
-                print(f'clear all areas')
+                # print(f'clear all areas')
                 self.active_area.set_active(self, False)
                 self.target_area.set_target(self, False)
                 self.target_area.target = False
@@ -98,3 +98,16 @@ class LaplandDefence(MainGame):
         self.target_area.target = False
         self.active_area = None
         self.target_area = None
+
+        self.change_faction()
+
+    def change_faction(self):
+        if self.turn == FactionType.PLAYER:
+            self.turn = FactionType.P23G
+        elif self.turn == FactionType.P23G:
+            self.turn = FactionType.LOL
+        elif self.turn == FactionType.LOL:
+            self.turn = FactionType.PIRJO
+        elif self.turn == FactionType.PIRJO:
+            self.turn = FactionType.PLAYER
+        print(self.turn)

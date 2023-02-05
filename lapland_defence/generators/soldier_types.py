@@ -9,6 +9,6 @@ class SoldierType(Enum):
 
 class FactionType(Enum):
     PLAYER = 1
-    NDA = 2
-    SIRPA = 3
-    PAULA = 4
+    P23G = 2
+    PIRJO = 3
+    LOL = 4

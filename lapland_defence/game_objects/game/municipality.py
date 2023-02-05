@@ -18,11 +18,11 @@ class Municipality(AreaObject):
     def set_color(self):
         if self.faction == FactionType.PLAYER:
             self.color = (100, 150, 0)
-        if self.faction == FactionType.NDA:
+        if self.faction == FactionType.P23G:
             self.color = (0, 100, 0)
-        if self.faction == FactionType.PAULA:
+        if self.faction == FactionType.LOL:
             self.color = (0, 120, 100)
-        if self.faction == FactionType.SIRPA:
+        if self.faction == FactionType.PIRJO:
             self.color = (100, 100, 0)
 
         if self.active:
@@ -57,4 +57,4 @@ class Municipality(AreaObject):
 
     def on_bounds_event(self, main_game):
         main_game.select_area(self)
-        print(f'{self.name} color to {self.color}')
+        # print(f'{self.name} color to {self.color}')

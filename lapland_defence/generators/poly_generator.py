@@ -49,19 +49,19 @@ class PolyGenerator:
 
     def set_faction_types(self, areas: list[Municipality]):
         nda = self.find_area(areas=areas, name='Enontekiö')
-        nda.faction = FactionType.NDA
+        nda.faction = FactionType.P23G
         self.set_closest_types(areas=areas, base_area=nda)
 
         sirpa = self.find_area(areas=areas, name='Kuusamo')
-        sirpa.faction = FactionType.SIRPA
+        sirpa.faction = FactionType.PIRJO
         self.set_closest_types(areas=areas, base_area=sirpa)
 
         paula = self.find_area(areas=areas, name='Vaala')
-        paula.faction = FactionType.PAULA
+        paula.faction = FactionType.LOL
         self.set_closest_types(areas=areas, base_area=paula)
 
     def set_closest_types(self, areas: list[Municipality], base_area: Municipality):
         for area in areas:
-            print(area.polygon.distance(base_area.polygon))
+            # print(area.polygon.distance(base_area.polygon))
             if area.polygon.distance(base_area.polygon) < 1:
                 area.faction = base_area.faction
